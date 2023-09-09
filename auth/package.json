@@ -1,0 +1,21 @@
+{
+  "name": "auth",
+  "version": "1.0.50",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "lint": "eslint src/**/*.ts",
+    "start": "bun run src/index.ts"
+  },
+  "dependencies": {
+    "elysia": "latest"
+  },
+  "devDependencies": {
+    "@types/eslint": "8.44.2",
+    "@typescript-eslint/eslint-plugin": "6.6.0",
+    "@typescript-eslint/parser": "6.6.0",
+    "bun-types": "latest",
+    "eslint": "8.49.0",
+    "typescript": "5.2.2"
+  },
+  "module": "src/index.js"
+}
