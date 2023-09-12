@@ -4,16 +4,21 @@
   "scripts": {
     "dev": "bun run --watch src/index.ts",
     "lint": "eslint src/**/*.ts",
-    "start": "bun run src/index.ts"
+    "start": "bun run src/index.ts",
+    "db:push": "drizzle-kit push:mysql"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@planetscale/database": "^1.11.0",
+    "drizzle-orm": "^0.28.6",
+    "elysia": "latest",
+    "lucia": "2.5.0"
   },
   "devDependencies": {
     "@types/eslint": "8.44.2",
     "@typescript-eslint/eslint-plugin": "6.6.0",
     "@typescript-eslint/parser": "6.6.0",
     "bun-types": "latest",
+    "drizzle-kit": "^0.19.13",
     "eslint": "8.49.0",
     "typescript": "5.2.2"
   },
