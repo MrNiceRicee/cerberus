@@ -3,8 +3,8 @@
 /// <reference types="lucia" />
 declare namespace Lucia {
   // (lucia docs)
-  // eslint-disable-next-line @typescript-eslint/consistent-type-imports 
-  type Auth = import("./lucia.js").Auth;
+  // eslint-disable-next-line @typescript-eslint/consistent-type-imports
+  type Auth = import('./lucia.js').Auth;
   type DatabaseUserAttributes = {
     username: string;
   };

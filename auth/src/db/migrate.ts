@@ -1,4 +1,5 @@
-import { migrate } from "drizzle-orm/planetscale-serverless/migrator";
-import { db } from "./db";
+import { migrate } from 'drizzle-orm/planetscale-serverless/migrator';
 
-await migrate(db, { migrationsFolder: "drizzle" });
+import { db } from './db';
+
+await migrate(db, { migrationsFolder: 'drizzle' });

@@ -1,15 +1,16 @@
-import { Elysia } from "elysia";
-import { db } from "./db/db";
+import { Elysia } from 'elysia';
+
+import { root } from './root';
 
 const app = new Elysia()
-  .decorate("db", db)
-  .get("/", () => {
-    const message = "Hello, Elysia!";
+  .use(root)
+  .get('/', () => {
+    const message = 'Hello, Elysia!';
 
     return message;
   })
   .listen(3000);
 
 console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
+  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`,
 );
