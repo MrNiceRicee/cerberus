@@ -2,6 +2,7 @@ import { planetscale } from '@lucia-auth/adapter-mysql';
 import { lucia } from 'lucia';
 import { elysia } from 'lucia/middleware';
 
+import { env } from './config/env';
 import { connection } from './db/db';
 
 export const auth = lucia({
@@ -10,7 +11,7 @@ export const auth = lucia({
     key: 'user_key',
     session: 'user_session',
   }),
-  env: process.env.NODE_ENV !== 'production' ? 'DEV' : 'PROD',
+  env: env.NODE_ENV === 'production' ? 'PROD' : 'DEV',
 
   middleware: elysia(),
   sessionCookie: {
