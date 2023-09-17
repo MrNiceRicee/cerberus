@@ -1,11 +1,39 @@
 import { Elysia, t } from 'elysia';
 
+import { ErrorException } from '../ErrorException';
 import { publicRoot } from '../root';
 
 export const register = new Elysia().use(publicRoot).post(
   '/register',
-  ({ body }) => {
-    return body;
+  async ({ body, auth, log }) => {
+    try {
+      log.info('Registering user');
+      const user = await auth.createUser({
+        key: {
+          providerId: 'username',
+          providerUserId: body.username.toLowerCase(),
+          password: body.password,
+        },
+        attributes: {
+          username: body.username,
+        },
+      });
+
+      const session = await auth.createSession({
+        userId: user.userId,
+        attributes: {},
+      });
+
+      return {
+        session,
+      };
+    } catch (error) {
+      log.error(error);
+      throw new ErrorException(
+        'INTERNAL_SERVER_ERROR',
+        'Encountered an error while registering user. Please try again later.',
+      );
+    }
   },
   {
     body: t.Object({
