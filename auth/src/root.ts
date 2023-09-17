@@ -51,7 +51,7 @@ export const publicRoot = new Elysia()
 
 export const privateRoot = new Elysia()
   .use(publicRoot)
-  .derive(async (context) => {
+  .on('beforeHandle', async (context) => {
     const authRequest = context.auth.handleRequest(context);
     const session = await authRequest.validateBearerToken();
 
@@ -59,8 +59,4 @@ export const privateRoot = new Elysia()
       context.log.error('Unauthorized - No session');
       throw new ErrorException('UNAUTHORIZED', 'Unauthorized');
     }
-
-    return {
-      session,
-    };
   });
