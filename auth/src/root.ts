@@ -49,7 +49,13 @@ export const publicRoot = new Elysia()
   .use(logger({ stream }))
   .use(errorRoot)
   .decorate('auth', auth)
-  .decorate('db', db);
+  .decorate('db', db)
+  .all('*', () => {
+    throw new ErrorException(
+      'NOT_IMPLEMENTED',
+      'Looks like you are trying to access an endpoint that does not exist.',
+    );
+  });
 
 export const privateRoot = new Elysia()
   .use(publicRoot)
