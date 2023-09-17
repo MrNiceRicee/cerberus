@@ -23,6 +23,10 @@ const statusCodes = {
     status: 500,
     message: 'Internal Server Error',
   },
+  NOT_IMPLEMENTED: {
+    status: 501,
+    message: 'Not Implemented',
+  },
 } as const;
 
 type StatusCode = keyof typeof statusCodes;
