@@ -1,3 +1,4 @@
+import type { InferSelectModel } from 'drizzle-orm';
 import { bigint, mysqlTableCreator, varchar } from 'drizzle-orm/mysql-core';
 
 const mysqlTable = mysqlTableCreator((name) => `cerberus_${name}`);
@@ -13,6 +14,8 @@ export const user = mysqlTable('auth_user', {
     .unique(),
   // other user attributes
 });
+
+export type User = InferSelectModel<typeof user>;
 
 export const key = mysqlTable('user_key', {
   id: varchar('id', {

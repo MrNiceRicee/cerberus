@@ -8,7 +8,7 @@ import { auth } from './lucia';
 
 const stream = pretty({
   colorize: true,
-  ignore: 'pid,hostname',
+  ignore: 'hostname',
   translateTime: 'yyyy-mm-dd HH:MM:ss',
 });
 
@@ -50,6 +50,12 @@ export const publicRoot = new Elysia()
   .use(errorRoot)
   .decorate('auth', auth)
   .decorate('db', db)
+  .derive((context) => {
+    // unsure how to properly do the initial logging in Elysia
+    context.log.info('%s %s', context.request.method, context.request.url);
+
+    return {};
+  })
   .all('*', () => {
     throw new ErrorException(
       'NOT_IMPLEMENTED',
@@ -59,12 +65,16 @@ export const publicRoot = new Elysia()
 
 export const privateRoot = new Elysia()
   .use(publicRoot)
-  .on('beforeHandle', async (context) => {
+  .derive(async (context) => {
     const authRequest = context.auth.handleRequest(context);
     const session = await authRequest.validateBearerToken();
 
     if (!session) {
-      context.log.error('Unauthorized - No session');
+      context.log.error('Blocked unauthorized request');
       throw new ErrorException('UNAUTHORIZED', 'Unauthorized');
     }
+
+    return {
+      session,
+    };
   });
