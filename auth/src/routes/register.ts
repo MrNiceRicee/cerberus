@@ -1,3 +1,4 @@
+import { DatabaseError } from '@planetscale/database';
 import { Elysia, t } from 'elysia';
 
 import { ErrorException } from '../ErrorException';
@@ -28,7 +29,12 @@ export const register = new Elysia().use(publicRoot).post(
         session,
       };
     } catch (error) {
-      log.error(error);
+      if (
+        error instanceof DatabaseError &&
+        error.message.includes('Duplicate entry')
+      ) {
+        throw new ErrorException('BAD_REQUEST', 'Username already exists');
+      }
       throw new ErrorException(
         'INTERNAL_SERVER_ERROR',
         'Encountered an error while registering user. Please try again later.',

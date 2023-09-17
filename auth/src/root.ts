@@ -30,11 +30,13 @@ const errorRoot = new Elysia()
         set.status = error.status;
 
         return {
-          code: error.code,
+          code: error.type,
           message: error.message,
           status: error.status,
         };
       default:
+        set.status = 500;
+
         return {
           code: 'Internal_Server_Error',
           message: error.message,

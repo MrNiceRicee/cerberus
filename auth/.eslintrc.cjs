@@ -28,6 +28,8 @@ const config = {
       'error',
       { blankLine: 'always', prev: '*', next: 'return' },
     ],
+    'no-constant-condition': ['error', { checkLoops: false }],
+    complexity: ['error', 15],
   },
 };
 
