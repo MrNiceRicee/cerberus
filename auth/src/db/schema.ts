@@ -6,6 +6,11 @@ export const user = mysqlTable('auth_user', {
   id: varchar('id', {
     length: 15, // change this when using custom user ids
   }).primaryKey(),
+  username: varchar('username', {
+    length: 255,
+  })
+    .notNull()
+    .unique(),
   // other user attributes
 });
 
