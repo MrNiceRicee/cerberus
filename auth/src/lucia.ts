@@ -7,9 +7,9 @@ import { connection } from './db/db';
 
 export const auth = lucia({
   adapter: planetscale(connection, {
-    user: 'auth_user',
-    key: 'user_key',
-    session: 'user_session',
+    user: 'cerberus_auth_user',
+    key: 'cerberus_user_key',
+    session: 'cerberus_user_session',
   }),
   env: env.NODE_ENV === 'production' ? 'PROD' : 'DEV',
 
