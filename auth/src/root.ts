@@ -12,13 +12,10 @@ const stream = pretty({
   translateTime: 'yyyy-mm-dd HH:MM:ss',
 });
 
-export const publicRoot = new Elysia()
+const errorRoot = new Elysia()
   .addError({
     ErrorException,
   })
-  .use(logger({ stream }))
-  .decorate('auth', auth)
-  .decorate('db', db)
   .onError(({ code, error, set }) => {
     switch (code) {
       case 'VALIDATION':
@@ -46,12 +43,24 @@ export const publicRoot = new Elysia()
     }
   });
 
+export const publicRoot = new Elysia()
+  .use(logger({ stream }))
+  .use(errorRoot)
+  .decorate('auth', auth)
+  .decorate('db', db);
+
 export const privateRoot = new Elysia()
   .use(publicRoot)
-  .on('request', async (context) => {
+  .derive(async (context) => {
     const authRequest = context.auth.handleRequest(context);
     const session = await authRequest.validateBearerToken();
+
     if (!session) {
+      context.log.error('Unauthorized - No session');
       throw new ErrorException('UNAUTHORIZED', 'Unauthorized');
     }
+
+    return {
+      session,
+    };
   });

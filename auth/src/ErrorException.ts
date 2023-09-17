@@ -32,7 +32,7 @@ export class ErrorException extends Error {
   public message: string;
   public code: string;
   constructor(code: StatusCode, message?: string) {
-    super(message);
+    super(message ?? statusCodes[code].message);
     this.status = statusCodes[code].status;
     this.message = message ?? statusCodes[code].message;
     this.code = code;
