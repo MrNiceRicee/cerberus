@@ -34,11 +34,11 @@ type StatusCode = keyof typeof statusCodes;
 export class ErrorException extends Error {
   public status: number;
   public message: string;
-  public code: string;
-  constructor(code: StatusCode, message?: string) {
-    super(message ?? statusCodes[code].message);
-    this.status = statusCodes[code].status;
-    this.message = message ?? statusCodes[code].message;
-    this.code = code;
+  public type: string;
+  constructor(type: StatusCode, message?: string) {
+    super(message ?? statusCodes[type].message);
+    this.status = statusCodes[type].status;
+    this.message = message ?? statusCodes[type].message;
+    this.type = type;
   }
 }
