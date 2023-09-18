@@ -62,13 +62,6 @@ export const publicRoot = new Elysia()
         requestId: randomUUID(),
       }),
     };
-  })
-  .all('*', () => {
-    // no need to log this
-    throw new ErrorException(
-      'NOT_IMPLEMENTED',
-      'Looks like you are trying to access an endpoint that does not exist.',
-    );
   });
 
 export const privateRoot = new Elysia()
