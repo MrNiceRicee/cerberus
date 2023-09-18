@@ -3,7 +3,9 @@ import { Elysia, t } from 'elysia';
 const baseModel = t.Object(
   {
     username: t.String({
-      minLength: 1,
+      // minLength: 1,
+      format: 'email',
+      default: '',
     }),
     password: t.String({
       minLength: 8,
@@ -23,6 +25,11 @@ export const authModel = new Elysia().model({
         confirmPassword: t.String({
           minLength: 8,
         }),
+        displayName: t.Optional(
+          t.String({
+            minLength: 1,
+          }),
+        ),
       }),
     ],
     {

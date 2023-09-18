@@ -8,7 +8,7 @@ export const logout = new Elysia()
     logRoute('Logging out user');
     try {
       // invalidate session
-      await auth.invalidateSession(session?.sessionId);
+      await auth.invalidateSession(session.sessionId);
 
       return {
         message: 'Successfully logged out',
