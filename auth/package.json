@@ -8,7 +8,8 @@
     "start": "bun src/index.ts",
     "db:push": "drizzle-kit push:mysql",
     "db:studio": "drizzle-kit studio",
-    "pretty": "prettier --write \"src/**/*.ts\""
+    "pretty": "prettier --write \"src/**/*.ts\"",
+    "typecheck": "tsc --noEmit"
   },
   "engines": {
     "node": ">=18.0.0"
