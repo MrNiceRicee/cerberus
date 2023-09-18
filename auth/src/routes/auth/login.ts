@@ -40,6 +40,9 @@ export const login = new Elysia()
             throw new ErrorException(
               'BAD_REQUEST',
               'Incorrect username or password',
+              {
+                help: 'Passwords are case sensitive. Check if your caps lock is on.',
+              },
             );
           }
         }

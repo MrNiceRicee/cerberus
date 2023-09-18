@@ -37,6 +37,9 @@ export const edit = new Elysia().use(privateRoot).put(
         throw new ErrorException(
           'BAD_REQUEST',
           'You must provide at least one field to edit.',
+          {
+            help: 'The editable field(s) are [displayName].',
+          },
         );
       }
     },
