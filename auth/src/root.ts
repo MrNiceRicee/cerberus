@@ -34,6 +34,7 @@ const errorRoot = new Elysia()
           code: error.type,
           message: error.message,
           status: error.status,
+          help: error.help,
         };
       default:
         set.status = 500;

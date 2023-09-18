@@ -35,10 +35,21 @@ export class ErrorException extends Error {
   public status: number;
   public message: string;
   public type: string;
-  constructor(type: StatusCode, message?: string) {
+  public help?: string;
+  constructor(
+    type: StatusCode,
+    message?: string,
+    options?: {
+      help?: string;
+    },
+  ) {
     super(message ?? statusCodes[type].message);
     this.status = statusCodes[type].status;
     this.message = message ?? statusCodes[type].message;
     this.type = type;
+    if (options?.help) {
+      // this.message += ` See ${options.help} for more information.`;
+      this.help = options.help;
+    }
   }
 }
