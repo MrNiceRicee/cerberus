@@ -4,8 +4,8 @@ import { privateRoot } from '../../root';
 
 export const logout = new Elysia()
   .use(privateRoot)
-  .post('/logout', async ({ auth, log, session }) => {
-    log.info('Logging out user');
+  .post('/logout', async ({ auth, log, session, logRoute }) => {
+    logRoute('Logging out user');
     try {
       // invalidate session
       await auth.invalidateSession(session?.sessionId);

@@ -10,8 +10,8 @@ export const login = new Elysia()
   .use(authModel)
   .post(
     '/login',
-    async ({ body, auth, log }) => {
-      log.info('Logging in user');
+    async ({ body, auth, log, logRoute }) => {
+      logRoute('Logging in user');
       try {
         const key = await auth.useKey(
           'username',

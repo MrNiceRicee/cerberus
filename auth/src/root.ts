@@ -51,12 +51,15 @@ export const publicRoot = new Elysia()
   .decorate('auth', auth)
   .decorate('db', db)
   .derive((context) => {
-    // unsure how to properly do the initial logging in Elysia
-    context.log.info('%s %s', context.request.method, context.request.url);
-
-    return {};
+    return {
+      logRoute: (message: string) => {
+        context.log.info('%s %s', context.request.method, context.request.url);
+        context.log.info(message);
+      },
+    };
   })
   .all('*', () => {
+    // no need to log this
     throw new ErrorException(
       'NOT_IMPLEMENTED',
       'Looks like you are trying to access an endpoint that does not exist.',
@@ -68,6 +71,7 @@ export const privateRoot = new Elysia()
   .derive(async (context) => {
     const authRequest = context.auth.handleRequest(context);
     const session = await authRequest.validateBearerToken();
+    context.logRoute('Validating session');
 
     if (!session) {
       context.log.error('Blocked unauthorized request');

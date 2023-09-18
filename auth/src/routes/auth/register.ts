@@ -10,9 +10,9 @@ export const register = new Elysia()
   .use(authModel)
   .post(
     '/register',
-    async ({ body, auth, log }) => {
+    async ({ body, log, auth, logRoute }) => {
+      logRoute('Registering user');
       try {
-        log.info('Registering user');
         const user = await auth.createUser({
           key: {
             providerId: 'username',
@@ -33,6 +33,7 @@ export const register = new Elysia()
           session,
         };
       } catch (error) {
+        log.error(error);
         if (
           error instanceof DatabaseError &&
           error.message.includes('Duplicate entry')
