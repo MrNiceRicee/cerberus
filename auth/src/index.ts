@@ -1,6 +1,5 @@
 import { Elysia } from 'elysia';
 
-import { ErrorException } from './ErrorException';
 import { env } from './config/env';
 import { routes } from './routes/routes';
 
