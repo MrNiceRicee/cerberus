@@ -1,4 +1,5 @@
 import { logger } from '@bogeychan/elysia-logger';
+import { randomUUID } from 'crypto';
 import { Elysia } from 'elysia';
 import pretty from 'pino-pretty';
 
@@ -8,7 +9,7 @@ import { auth } from './lucia';
 
 const stream = pretty({
   colorize: true,
-  ignore: 'hostname',
+  ignore: 'pid,hostname',
   translateTime: 'yyyy-mm-dd HH:MM:ss',
 });
 
@@ -56,6 +57,9 @@ export const publicRoot = new Elysia()
         context.log.info('%s %s', context.request.method, context.request.url);
         context.log.info(message);
       },
+      log: context.log.child({
+        requestId: randomUUID(),
+      }),
     };
   })
   .all('*', () => {
