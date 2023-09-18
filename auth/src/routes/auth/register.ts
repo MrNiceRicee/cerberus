@@ -15,12 +15,13 @@ export const register = new Elysia()
       try {
         const user = await auth.createUser({
           key: {
-            providerId: 'username',
-            providerUserId: body.username.toLowerCase(),
+            providerId: 'email',
+            providerUserId: body.email.toLowerCase(),
             password: body.password,
           },
           attributes: {
-            username: body.username,
+            email: body.email.toLowerCase(),
+            display_name: body.displayName ?? '',
           },
         });
 

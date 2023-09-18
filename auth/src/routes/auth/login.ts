@@ -14,8 +14,8 @@ export const login = new Elysia()
       logRoute('Logging in user');
       try {
         const key = await auth.useKey(
-          'username',
-          body.username.toLowerCase(),
+          'email',
+          body.email.toLowerCase(),
           body.password,
         );
 

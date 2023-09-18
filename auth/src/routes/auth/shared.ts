@@ -2,7 +2,7 @@ import { Elysia, t } from 'elysia';
 
 const baseModel = t.Object(
   {
-    username: t.String({
+    email: t.String({
       // minLength: 1,
       format: 'email',
       default: '',

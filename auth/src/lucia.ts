@@ -15,12 +15,19 @@ export const auth = lucia({
 
   middleware: elysia(),
   sessionCookie: {
-    expires: false,
+    expires: true,
+  },
+  sessionExpiresIn: {
+    // 5 seconds
+    activePeriod: 5 * 1000,
+    // 1 day
+    idlePeriod: 24 * 60 * 60 * 1000,
   },
 
   getUserAttributes: (data) => {
     return {
-      username: data.username,
+      email: data.email,
+      displayName: data.display_name,
     };
   },
 });

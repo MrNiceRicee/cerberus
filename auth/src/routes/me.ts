@@ -12,7 +12,8 @@ export const me = new Elysia()
 
       return {
         user: {
-          username: user.username,
+          email: user.email,
+          displayName: user.displayName,
         },
       };
     } catch (error) {
