@@ -1,0 +1,22 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "clean": {
+      "cache": false,
+      "outputs": []
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^db:studio"]
+    },
+    "lint": {
+      "outputs": [],
+      "cache": true
+    },
+    "typecheck": {
+      "outputs": [],
+      "cache": true
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "cerberus",
+  "workspaces": [
+    "auth",
+    "packages/*"
+  ],
+  "scripts": {
+    "clean": "turbo clean && rm -rf node_modules",
+    "dev": "turbo run dev",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "turbo": "^1.10.14"
+  }
+}
