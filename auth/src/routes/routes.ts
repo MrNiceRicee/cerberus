@@ -4,6 +4,7 @@ import { login } from './auth/login';
 import { logout } from './auth/logout';
 import { logoutAllSessions } from './auth/logoutAllSessions';
 import { register } from './auth/register';
+import { edit } from './edit';
 import { me } from './me';
 
 export const routes = new Elysia()
@@ -11,7 +12,7 @@ export const routes = new Elysia()
     return app.use(register).use(login).use(logout).use(logoutAllSessions);
   })
   .group('/user', (app) => {
-    return app.use(me);
+    return app.use(me).use(edit);
   })
   .get('/health', () => {
     return new Response('Online!', {
