@@ -1,6 +1,6 @@
 {
   "name": "auth",
-  "version": "1.0.50",
+  "version": "1.0.6",
   "scripts": {
     "clean": "rm -rf node_modules dist",
     "dev": "bun run --watch src/index.ts",
@@ -25,8 +25,8 @@
   },
   "devDependencies": {
     "bun-types": "latest",
-    "config-prettier": "*",
-    "config-ts": "*",
+    "config-prettier": "^0.1.0",
+    "config-ts": "^0.1.0",
     "eslint": "8.49.0",
     "prettier": "^3.0.3",
     "typescript": "5.2.2"
