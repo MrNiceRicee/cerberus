@@ -7,8 +7,7 @@
     },
     "dev": {
       "cache": false,
-      "persistent": true,
-      "dependsOn": ["^db:studio"]
+      "persistent": true
     },
     "lint": {
       "outputs": [],
@@ -17,6 +16,10 @@
     "typecheck": {
       "outputs": [],
       "cache": true
+    },
+    "db:push": {
+      "cache": false
     }
-  }
+  },
+  "globalEnv": [".env.local"]
 }

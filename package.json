@@ -4,14 +4,19 @@
     "auth",
     "packages/*"
   ],
+  "private": true,
   "scripts": {
     "clean": "turbo clean && rm -rf node_modules",
     "dev": "turbo run dev",
     "typecheck": "turbo run typecheck",
-    "lint": "turbo run lint"
+    "lint": "turbo run lint",
+    "postinstall": "manypkg check",
+    "db:push": "turbo run db:push --filter=core-db"
   },
-  "dependencies": {},
   "devDependencies": {
-    "turbo": "^1.10.14"
+    "@manypkg/cli": "^0.21.0",
+    "prettier": "^3.0.3",
+    "turbo": "^1.10.14",
+    "typescript": "5.2.2"
   }
 }
