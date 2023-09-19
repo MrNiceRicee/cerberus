@@ -4,7 +4,7 @@ import { Elysia } from 'elysia';
 import pretty from 'pino-pretty';
 
 import { ErrorException } from './ErrorException';
-import { db } from './db/db';
+import { db } from '../../packages/core-db';
 import { auth } from './lucia';
 
 const stream = pretty({

@@ -18,6 +18,7 @@
     "@bogeychan/elysia-logger": "^0.0.9",
     "@lucia-auth/adapter-mysql": "^2.0.0",
     "@planetscale/database": "^1.11.0",
+    "core-db": "*",
     "drizzle-orm": "^0.28.6",
     "elysia": "latest",
     "lucia": "2.5.0",
@@ -31,10 +32,8 @@
     "@typescript-eslint/eslint-plugin": "6.6.0",
     "@typescript-eslint/parser": "6.6.0",
     "bun-types": "latest",
-    "dotenv": "^16.3.1",
     "drizzle-kit": "^0.19.13",
     "eslint": "8.49.0",
-    "prettier": "3.0.2",
     "typescript": "5.2.2"
   },
   "module": "src/index.js"
