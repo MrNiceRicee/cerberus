@@ -16,7 +16,8 @@
     "postinstall": "manypkg check",
     "package:fix": "manypkg fix",
     "db:push": "turbo run db:push --filter=core-db",
-    "ci": "turbo run lint format typecheck"
+    "ci": "turbo run lint format typecheck",
+    "start:auth": "cd auth && bun start"
   },
   "dependencies": {
     "@manypkg/cli": "^0.21.0",
