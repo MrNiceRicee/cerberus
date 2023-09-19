@@ -7,7 +7,7 @@ on:
     branches: ["main"]
 
 jobs:
-  lint-test:
+  lint-test-format-typecheck:
     runs-on: ubuntu-latest
 
     env:
