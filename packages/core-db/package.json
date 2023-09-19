@@ -6,7 +6,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "clean": "turbo clean && rm -rf node_modules",
+    "clean": "rm -rf node_modules",
     "db:studio": "drizzle-kit studio",
     "db:push": "drizzle-kit push:mysql",
     "dev": "bun db:studio",
@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "bun-types": "latest",
+    "config-ts": "*",
     "drizzle-kit": "^0.19.13",
     "typescript": "5.2.2"
   },

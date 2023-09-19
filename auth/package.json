@@ -32,6 +32,7 @@
     "@typescript-eslint/eslint-plugin": "6.6.0",
     "@typescript-eslint/parser": "6.6.0",
     "bun-types": "latest",
+    "config-ts": "*",
     "drizzle-kit": "^0.19.13",
     "eslint": "8.49.0",
     "typescript": "5.2.2"

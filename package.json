@@ -2,15 +2,17 @@
   "name": "cerberus",
   "workspaces": [
     "auth",
-    "packages/*"
+    "packages/*",
+    "tools/*"
   ],
   "private": true,
   "scripts": {
-    "clean": "turbo clean && rm -rf node_modules",
+    "clean": "turbo clean && rm -rf node_modules && rm -rf bun.lockb",
     "dev": "turbo run dev",
     "typecheck": "turbo run typecheck",
     "lint": "turbo run lint",
     "postinstall": "manypkg check",
+    "package:fix": "manypkg fix",
     "db:push": "turbo run db:push --filter=core-db"
   },
   "dependencies": {
