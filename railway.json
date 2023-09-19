@@ -1,11 +1,11 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "watchPatterns": ["src/**/*", "package.json"],
+    "watchPatterns": ["auth/src/**/*", "package.json", "auth/package.json"],
     "buildCommand": null
   },
   "deploy": {
-    "startCommand": "bun start",
+    "startCommand": "bun start:auth",
     "healthcheckPath": "/health",
     "healthcheckTimeout": 300,
     "restartPolicyType": "NEVER",
