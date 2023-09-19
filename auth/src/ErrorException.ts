@@ -33,7 +33,7 @@ type StatusCode = keyof typeof statusCodes;
 
 export class ErrorException extends Error {
   public status: number;
-  public message: string;
+  public override message: string;
   public type: string;
   public help?: string;
   constructor(

@@ -1,9 +1,9 @@
 import { planetscale } from '@lucia-auth/adapter-mysql';
+import { connection } from 'core-db';
 import { lucia } from 'lucia';
 import { elysia } from 'lucia/middleware';
 
 import { env } from './config/env';
-import { connection } from './db/db';
 
 export const auth = lucia({
   adapter: planetscale(connection, {

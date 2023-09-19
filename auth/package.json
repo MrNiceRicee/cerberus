@@ -4,11 +4,9 @@
   "scripts": {
     "clean": "rm -rf node_modules dist",
     "dev": "bun run --watch src/index.ts",
-    "lint": "eslint src/**/*.ts",
+    "lint": "eslint ./src/** --ext .ts --ext .js",
+    "format": "prettier --check \"src/**/*.{ts,md,json}\"",
     "start": "bun src/index.ts",
-    "db:push": "drizzle-kit push:mysql",
-    "db:studio": "drizzle-kit studio",
-    "pretty": "prettier --write \"src/**/*.ts\"",
     "typecheck": "tsc --noEmit"
   },
   "engines": {
@@ -18,7 +16,7 @@
     "@bogeychan/elysia-logger": "^0.0.9",
     "@lucia-auth/adapter-mysql": "^2.0.0",
     "@planetscale/database": "^1.11.0",
-    "drizzle-orm": "^0.28.6",
+    "core-db": "*",
     "elysia": "latest",
     "lucia": "2.5.0",
     "mysql2": "^3.6.1",
@@ -26,16 +24,13 @@
     "zod": "^3.22.2"
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
-    "@types/eslint": "8.44.2",
-    "@typescript-eslint/eslint-plugin": "6.6.0",
-    "@typescript-eslint/parser": "6.6.0",
     "bun-types": "latest",
-    "dotenv": "^16.3.1",
-    "drizzle-kit": "^0.19.13",
+    "config-prettier": "*",
+    "config-ts": "*",
     "eslint": "8.49.0",
-    "prettier": "3.0.2",
+    "prettier": "^3.0.3",
     "typescript": "5.2.2"
   },
-  "module": "src/index.js"
+  "module": "src/index.js",
+  "prettier": "config-prettier"
 }

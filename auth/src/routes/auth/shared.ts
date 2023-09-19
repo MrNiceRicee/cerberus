@@ -30,6 +30,11 @@ export const authModel = new Elysia().model({
             minLength: 1,
           }),
         ),
+        avatarUrl: t.Optional(
+          t.String({
+            minLength: 1,
+          }),
+        ),
       }),
     ],
     {

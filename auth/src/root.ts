@@ -1,13 +1,13 @@
 import { logger } from '@bogeychan/elysia-logger';
-import { randomUUID } from 'crypto';
+import { db } from 'core-db';
 import { Elysia } from 'elysia';
-import pretty from 'pino-pretty';
+import { nanoid } from 'nanoid';
+import pinoPretty from 'pino-pretty';
 
 import { ErrorException } from './ErrorException';
-import { db } from './db/db';
 import { auth } from './lucia';
 
-const stream = pretty({
+const stream = pinoPretty({
   colorize: true,
   ignore: 'pid,hostname',
   translateTime: 'yyyy-mm-dd HH:MM:ss',
@@ -48,7 +48,13 @@ const errorRoot = new Elysia()
   });
 
 export const publicRoot = new Elysia()
-  .use(logger({ stream }))
+  .state('requestId', nanoid())
+  .use((context) =>
+    logger({
+      stream,
+      msgPrefix: `[${context.store.requestId}] `,
+    }),
+  )
   .use(errorRoot)
   .decorate('auth', auth)
   .decorate('db', db)
@@ -58,9 +64,6 @@ export const publicRoot = new Elysia()
         context.log.info('%s %s', context.request.method, context.request.url);
         context.log.info(message);
       },
-      log: context.log.child({
-        requestId: randomUUID(),
-      }),
     };
   });
 

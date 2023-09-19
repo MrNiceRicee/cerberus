@@ -31,6 +31,11 @@ const config = {
     'no-constant-condition': ['error', { checkLoops: false }],
     complexity: ['error', 15],
   },
+  "ignorePatterns": [
+    "node_modules/",
+    "dist/",
+    ".eslintrc.cjs",
+  ]
 };
 
 module.exports = config;
