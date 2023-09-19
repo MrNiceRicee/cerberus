@@ -15,7 +15,8 @@
     "format:fix": "turbo run format:fix",
     "postinstall": "manypkg check",
     "package:fix": "manypkg fix",
-    "db:push": "turbo run db:push --filter=core-db"
+    "db:push": "turbo run db:push --filter=core-db",
+    "ci": "turbo run lint format typecheck"
   },
   "dependencies": {
     "@manypkg/cli": "^0.21.0",

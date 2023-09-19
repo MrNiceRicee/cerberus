@@ -1,6 +1,9 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
+    "topo": {
+      "dependsOn": ["^topo"]
+    },
     "clean": {
       "cache": false,
       "outputs": []
@@ -10,19 +13,24 @@
       "persistent": true
     },
     "lint": {
-      "outputs": [],
-      "cache": true
+      "dependsOn": ["^topo"],
+      "outputs": ["node_modules/.cache/.eslintcache"]
     },
     "format": {
+      "dependsOn": ["^topo"],
       "outputs": ["node_modules/.cache/.prettiercache"],
       "outputMode": "new-only"
     },
     "typecheck": {
+      "dependsOn": ["^topo"],
       "outputs": [],
       "cache": true
     },
     "db:push": {
       "cache": false
+    },
+    "ci": {
+      "dependsOn": ["lint", "typecheck"]
     }
   },
   "globalEnv": [".env.local"]
