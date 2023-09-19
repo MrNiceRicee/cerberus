@@ -22,6 +22,7 @@ export const register = new Elysia()
           attributes: {
             email: body.email.toLowerCase(),
             display_name: body.displayName ?? '',
+            avatar_url: body.avatarUrl ?? '',
           },
         });
 

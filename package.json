@@ -13,7 +13,7 @@
     "postinstall": "manypkg check",
     "db:push": "turbo run db:push --filter=core-db"
   },
-  "devDependencies": {
+  "dependencies": {
     "@manypkg/cli": "^0.21.0",
     "prettier": "^3.0.3",
     "turbo": "^1.10.14",

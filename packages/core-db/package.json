@@ -9,7 +9,8 @@
     "clean": "turbo clean && rm -rf node_modules",
     "db:studio": "drizzle-kit studio",
     "db:push": "drizzle-kit push:mysql",
-    "dev": "bun db:studio"
+    "dev": "bun db:studio",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "bun-types": "latest",
