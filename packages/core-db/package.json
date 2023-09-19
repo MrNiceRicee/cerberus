@@ -10,17 +10,21 @@
     "db:studio": "drizzle-kit studio",
     "db:push": "drizzle-kit push:mysql",
     "dev": "bun db:studio",
+    "format": "prettier --check \"src/**/*.{mjs,ts,md,json}\"",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "bun-types": "latest",
+    "config-prettier": "*",
     "config-ts": "*",
     "drizzle-kit": "^0.19.13",
+    "prettier": "^3.0.3",
     "typescript": "5.2.2"
   },
   "dependencies": {
     "@planetscale/database": "^1.11.0",
     "drizzle-orm": "^0.28.6",
     "zod": "^3.22.2"
-  }
+  },
+  "prettier": "config-prettier"
 }

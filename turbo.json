@@ -13,6 +13,10 @@
       "outputs": [],
       "cache": true
     },
+    "format": {
+      "outputs": ["node_modules/.cache/.prettiercache"],
+      "outputMode": "new-only"
+    },
     "typecheck": {
       "outputs": [],
       "cache": true

@@ -1,5 +1,10 @@
 import type { InferSelectModel } from 'drizzle-orm';
-import { bigint, mysqlTableCreator, varchar, text } from 'drizzle-orm/mysql-core';
+import {
+  bigint,
+  mysqlTableCreator,
+  text,
+  varchar,
+} from 'drizzle-orm/mysql-core';
 
 const mysqlTable = mysqlTableCreator((name) => `cerberus_${name}`);
 
@@ -10,7 +15,8 @@ export const user = mysqlTable('auth_user', {
   email: varchar('email', {
     length: 255,
   })
-    .notNull(),
+    .notNull()
+    .unique(),
   display_name: varchar('display_name', {
     length: 255,
   }),
