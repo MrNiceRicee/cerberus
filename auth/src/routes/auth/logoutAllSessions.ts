@@ -1,5 +1,6 @@
 import { Elysia } from 'elysia';
 
+import { ErrorException } from '../../ErrorException';
 import { privateRoot } from '../../root';
 
 export const logoutAllSessions = new Elysia()
@@ -15,5 +16,10 @@ export const logoutAllSessions = new Elysia()
       };
     } catch (error) {
       log.error(error);
+
+      throw new ErrorException(
+        'INTERNAL_SERVER_ERROR',
+        'Encountered an error while logging out all sessions. Please try again later.',
+      );
     }
   });

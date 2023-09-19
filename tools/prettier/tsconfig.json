@@ -1,8 +1,0 @@
-{
-  "extends": "config-ts/base.json",
-  "compilerOptions": {
-    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
-  },
-  "include": ["./index.mjs"],
-  "exclude": ["node_modules"]
-}
