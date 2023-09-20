@@ -2,8 +2,8 @@
   "name": "auth",
   "version": "1.0.6",
   "scripts": {
-    "clean": "rm -rf node_modules dist",
-    "dev": "bun run --watch src/index.ts",
+    "clean": "rm -rf node_modules build .turbo",
+    "dev": "bun run --bun --watch src/index.ts",
     "lint": "eslint ./src/** --ext .ts --ext .js",
     "format": "prettier --check \"src/**/*.{ts,md,json}\"",
     "start": "bun src/index.ts",
