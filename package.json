@@ -2,6 +2,7 @@
   "name": "cerberus",
   "workspaces": [
     "auth",
+    "auth-next",
     "packages/*",
     "tools/*"
   ],
