@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid';
 import pinoPretty from 'pino-pretty';
 
 import { ErrorException } from './ErrorException';
-import { auth } from './lucia';
+import { auth as luciaAuth } from './lucia';
 
 const stream = pinoPretty({
   colorize: true,
@@ -14,7 +14,7 @@ const stream = pinoPretty({
 });
 
 const errorRoot = new Elysia()
-  .addError({
+  .error({
     ErrorException,
   })
   .onError(({ code, error, set }) => {
@@ -48,15 +48,14 @@ const errorRoot = new Elysia()
   });
 
 export const publicRoot = new Elysia()
-  .state('requestId', nanoid())
-  .use((context) =>
+  .use(
     logger({
       stream,
-      msgPrefix: `[${context.store.requestId}] `,
+      msgPrefix: `[${nanoid()}] `,
     }),
   )
   .use(errorRoot)
-  .decorate('auth', auth)
+  .decorate('auth', luciaAuth)
   .decorate('db', db)
   .derive((context) => {
     return {
@@ -69,8 +68,8 @@ export const publicRoot = new Elysia()
 
 export const privateRoot = new Elysia()
   .use(publicRoot)
-  .derive(async (context) => {
-    const authRequest = context.auth.handleRequest(context);
+  .derive(async ({ auth, ...context }) => {
+    const authRequest = auth.handleRequest(context);
     const session = await authRequest.validateBearerToken();
     context.logRoute('Validating session');
 
