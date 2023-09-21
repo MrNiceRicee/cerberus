@@ -69,6 +69,9 @@ export const publicRoot = new Elysia()
 export const privateRoot = new Elysia()
   .use(publicRoot)
   .derive(async ({ auth, ...context }) => {
+    // waiting for lucia patch to fix
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const authRequest = auth.handleRequest(context);
     const session = await authRequest.validateBearerToken();
     context.logRoute('Validating session');
