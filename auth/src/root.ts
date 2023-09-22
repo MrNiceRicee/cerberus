@@ -1,4 +1,5 @@
 import { logger } from '@bogeychan/elysia-logger';
+import { HoltLogger } from '@tlscipher/holt';
 import { db } from 'core-db';
 import { Elysia } from 'elysia';
 import { nanoid } from 'nanoid';
@@ -20,7 +21,7 @@ const errorRoot = new Elysia()
   .onError(({ code, error, set }) => {
     switch (code) {
       case 'VALIDATION':
-        set.status = 400;
+        set.status = 'Bad Request';
 
         return {
           code: 'Validation_Error',
@@ -47,13 +48,21 @@ const errorRoot = new Elysia()
     }
   });
 
+const loggerRoot = (app: Elysia) => {
+  const requestId = nanoid();
+
+  return app
+    .use(
+      logger({
+        stream,
+        msgPrefix: `[${requestId}] `,
+      }),
+    )
+    .use(new HoltLogger({ colorful: true }).getLogger());
+};
+
 export const publicRoot = new Elysia()
-  .use(
-    logger({
-      stream,
-      msgPrefix: `[${nanoid()}] `,
-    }),
-  )
+  .use(loggerRoot)
   .use(errorRoot)
   .decorate('auth', luciaAuth)
   .decorate('db', db)
@@ -74,12 +83,12 @@ export const privateRoot = new Elysia()
     // @ts-ignore
     const authRequest = auth.handleRequest(context);
     const session = await authRequest.validateBearerToken();
-    context.logRoute('Validating session');
 
     if (!session) {
       context.log.error('Blocked unauthorized request');
-      throw new ErrorException('UNAUTHORIZED', 'Unauthorized');
+      throw new ErrorException('Unauthorized');
     }
+    context.log.info('Authorized request');
 
     return {
       session,

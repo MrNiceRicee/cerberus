@@ -17,9 +17,9 @@ export const me = new Elysia()
         },
       };
     } catch (error) {
-      log.error(error);
+      log.error(error, 'Encountered an error while getting user');
       throw new ErrorException(
-        'INTERNAL_SERVER_ERROR',
+        'Internal Server Error',
         'Encountered an error while getting user. Please try again later.',
       );
     }

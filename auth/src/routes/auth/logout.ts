@@ -15,9 +15,9 @@ export const logout = new Elysia()
         message: 'Successfully logged out',
       };
     } catch (error) {
-      log.error(error);
+      log.error(error, 'Encountered an error while logging out user');
       throw new ErrorException(
-        'INTERNAL_SERVER_ERROR',
+        'Internal Server Error',
         'Encountered an error while logging out. Please try again later.',
       );
     }

@@ -15,6 +15,7 @@
   "dependencies": {
     "@bogeychan/elysia-logger": "^0.0.9",
     "@lucia-auth/adapter-mysql": "^2.0.0",
+    "@tlscipher/holt": "^1.1.0",
     "@planetscale/database": "^1.11.0",
     "core-db": "*",
     "elysia": "latest",

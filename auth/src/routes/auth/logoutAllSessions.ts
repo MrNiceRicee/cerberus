@@ -15,10 +15,10 @@ export const logoutAllSessions = new Elysia()
         message: 'Successfully logged out all sessions',
       };
     } catch (error) {
-      log.error(error);
+      log.error(error, 'Encountered an error while logging out all sessions');
 
       throw new ErrorException(
-        'INTERNAL_SERVER_ERROR',
+        'Internal Server Error',
         'Encountered an error while logging out all sessions. Please try again later.',
       );
     }
