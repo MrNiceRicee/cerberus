@@ -51,7 +51,10 @@ const errorRoot = new Elysia()
 const loggerRoot = (app: Elysia) => {
   const requestId = nanoid();
 
-  return app
+  return new Elysia({
+    name: 'logger-root',
+    seed: app,
+  })
     .use(
       logger({
         stream,
@@ -61,7 +64,9 @@ const loggerRoot = (app: Elysia) => {
     .use(new HoltLogger({ colorful: true }).getLogger());
 };
 
-export const publicRoot = new Elysia()
+export const publicRoot = new Elysia({
+  name: 'public-root',
+})
   .use(loggerRoot)
   .use(errorRoot)
   .decorate('auth', luciaAuth)
@@ -75,7 +80,9 @@ export const publicRoot = new Elysia()
     };
   });
 
-export const privateRoot = new Elysia()
+export const privateRoot = new Elysia({
+  name: 'private-root',
+})
   .use(publicRoot)
   .derive(async ({ auth, ...context }) => {
     // waiting for lucia patch to fix

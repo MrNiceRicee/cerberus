@@ -15,11 +15,11 @@
   "dependencies": {
     "@bogeychan/elysia-logger": "^0.0.9",
     "@lucia-auth/adapter-mysql": "^2.0.0",
-    "@tlscipher/holt": "^1.1.0",
     "@planetscale/database": "^1.11.0",
+    "@tlscipher/holt": "^1.1.0",
     "core-db": "*",
     "elysia": "latest",
-    "lucia": "2.5.0",
+    "lucia": "2.6.0",
     "mysql2": "^3.6.1",
     "pino-pretty": "^10.2.0",
     "zod": "^3.22.2"
