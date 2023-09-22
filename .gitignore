@@ -44,3 +44,7 @@ package-lock.json
 
 # turbo
 .turbo
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

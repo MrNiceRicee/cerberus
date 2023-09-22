@@ -2,8 +2,8 @@
   "name": "auth",
   "version": "1.0.6",
   "scripts": {
-    "clean": "rm -rf node_modules dist",
-    "dev": "bun run --watch src/index.ts",
+    "clean": "rm -rf node_modules build .turbo",
+    "dev": "bun run --bun --watch src/index.ts",
     "lint": "eslint ./src/** --ext .ts --ext .js",
     "format": "prettier --check \"src/**/*.{ts,md,json}\"",
     "start": "bun src/index.ts",
@@ -16,17 +16,18 @@
     "@bogeychan/elysia-logger": "^0.0.9",
     "@lucia-auth/adapter-mysql": "^2.0.0",
     "@planetscale/database": "^1.11.0",
+    "@tlscipher/holt": "^1.1.0",
     "core-db": "*",
     "elysia": "latest",
-    "lucia": "2.5.0",
+    "lucia": "2.6.0",
     "mysql2": "^3.6.1",
     "pino-pretty": "^10.2.0",
     "zod": "^3.22.2"
   },
   "devDependencies": {
     "bun-types": "latest",
-    "config-prettier": "^0.1.0",
-    "config-ts": "^0.1.0",
+    "config-prettier": "*",
+    "config-ts": "*",
     "eslint": "8.49.0",
     "prettier": "^3.0.3",
     "typescript": "5.2.2"

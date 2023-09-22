@@ -29,7 +29,7 @@ export const login = new Elysia()
           user: session.user,
         };
       } catch (error) {
-        log.error(error);
+        log.error(error, 'Error while logging in user');
         if (error instanceof LuciaError) {
           if (
             error.message === 'AUTH_INVALID_KEY_ID' ||
@@ -38,7 +38,7 @@ export const login = new Elysia()
             // user does not exist
             // or invalid password
             throw new ErrorException(
-              'BAD_REQUEST',
+              'Bad Request',
               'Incorrect username or password',
               {
                 help: 'Passwords are case sensitive. Check if your caps lock is on.',
@@ -47,7 +47,7 @@ export const login = new Elysia()
           }
         }
         throw new ErrorException(
-          'INTERNAL_SERVER_ERROR',
+          'Internal Server Error',
           'Encountered an error while logging in. Please try again later.',
         );
       }

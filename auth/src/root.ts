@@ -1,11 +1,12 @@
 import { logger } from '@bogeychan/elysia-logger';
+import { HoltLogger } from '@tlscipher/holt';
 import { db } from 'core-db';
 import { Elysia } from 'elysia';
 import { nanoid } from 'nanoid';
 import pinoPretty from 'pino-pretty';
 
 import { ErrorException } from './ErrorException';
-import { auth } from './lucia';
+import { auth as luciaAuth } from './lucia';
 
 const stream = pinoPretty({
   colorize: true,
@@ -14,13 +15,13 @@ const stream = pinoPretty({
 });
 
 const errorRoot = new Elysia()
-  .addError({
+  .error({
     ErrorException,
   })
   .onError(({ code, error, set }) => {
     switch (code) {
       case 'VALIDATION':
-        set.status = 400;
+        set.status = 'Bad Request';
 
         return {
           code: 'Validation_Error',
@@ -47,16 +48,28 @@ const errorRoot = new Elysia()
     }
   });
 
-export const publicRoot = new Elysia()
-  .state('requestId', nanoid())
-  .use((context) =>
-    logger({
-      stream,
-      msgPrefix: `[${context.store.requestId}] `,
-    }),
-  )
+const loggerRoot = (app: Elysia) => {
+  const requestId = nanoid();
+
+  return new Elysia({
+    name: 'logger-root',
+    seed: app,
+  })
+    .use(
+      logger({
+        stream,
+        msgPrefix: `[${requestId}] `,
+      }),
+    )
+    .use(new HoltLogger({ colorful: true }).getLogger());
+};
+
+export const publicRoot = new Elysia({
+  name: 'public-root',
+})
+  .use(loggerRoot)
   .use(errorRoot)
-  .decorate('auth', auth)
+  .decorate('auth', luciaAuth)
   .decorate('db', db)
   .derive((context) => {
     return {
@@ -67,17 +80,22 @@ export const publicRoot = new Elysia()
     };
   });
 
-export const privateRoot = new Elysia()
+export const privateRoot = new Elysia({
+  name: 'private-root',
+})
   .use(publicRoot)
-  .derive(async (context) => {
-    const authRequest = context.auth.handleRequest(context);
+  .derive(async ({ auth, ...context }) => {
+    // waiting for lucia patch to fix
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const authRequest = auth.handleRequest(context);
     const session = await authRequest.validateBearerToken();
-    context.logRoute('Validating session');
 
     if (!session) {
       context.log.error('Blocked unauthorized request');
-      throw new ErrorException('UNAUTHORIZED', 'Unauthorized');
+      throw new ErrorException('Unauthorized');
     }
+    context.log.info('Authorized request');
 
     return {
       session,

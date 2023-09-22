@@ -40,10 +40,10 @@ export const register = new Elysia()
           error instanceof DatabaseError &&
           error.message.includes('Duplicate entry')
         ) {
-          throw new ErrorException('BAD_REQUEST', 'Username already exists');
+          throw new ErrorException('Bad Request', 'Username already exists');
         }
         throw new ErrorException(
-          'INTERNAL_SERVER_ERROR',
+          'Internal Server Error',
           'Encountered an error while registering user. Please try again later.',
         );
       }
@@ -52,7 +52,7 @@ export const register = new Elysia()
       body: 'register',
       beforeHandle: ({ body }) => {
         if (body.password !== body.confirmPassword) {
-          throw new ErrorException('BAD_REQUEST', 'Passwords do not match');
+          throw new ErrorException('Bad Request', 'Passwords do not match');
         }
       },
     },
